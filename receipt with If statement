@@ -1,0 +1,182 @@
+//AUTHOR: Jason Strang
+//COURSE: CPT167
+//Purpose: To show a final order report with item specifications and price with proper formats using an IF statement 
+//STARTDATE: 03/30/2021
+package edu.cpt167.strang.exercise3;
+
+
+
+import java.util.Scanner;
+
+public class StrangMainClass 
+{
+	
+	//Main Method
+	public static void main(String[] args) 
+	{
+		//INTRODUCTION
+		//Initialize Scanner
+		Scanner input = new Scanner(System.in);
+		
+		//constants
+		final double TAX_RATE = .075; //Fixed tax rate of .075
+		final String DISCOUNT_NAME_MEMBER = "MEMBER"; // fixed discount name MEMBER
+		final String DISCOUNT_NAME_SENIOR = "SENIOR"; // fixed discount name SENIOR
+		final String DISCOUNT_NAME_NONE = "NONE"; // fixed discount name NONE
+		final double DISCOUNT_RATE_MEMBER = .15; //FIxed discount rate member .15
+		final double DISCOUNT_RATE_SENIOR = .25;//FIxed discount rate SENIOR .25
+		final double DISCOUNT_RATE_NONE = 0.0;//FIxed discount rate NONE 0.0
+		
+		//Variables
+		String userName = ""; //Name of current user
+		String itemName = ""; // Type of item purchased
+		double originalPrice = 0.0; // Original price for Item
+		int howMany = 0; //Amount of Item a customer purchased
+		char menuSelection = ' '; //Which menu item was selected
+		double discountRate = 0.0; //The discounted rate based on input
+		double discountAmount = 0.0; // The discounted amount per item
+		double discountPrice = 0.0; // Total amount of discount
+		double subTotal = 0.0; // Total amount of items after discount before tax
+		double tax = 0.0; //Total amount of taxes on items
+		double totalCost = 0.0; //Total cost of items with tax
+		
+		//Welcome Banner
+		System.out.println("Welcome to the Store Program");
+		System.out.println("To show a final order report with item specifications,");
+		System.out.println("price & total cost with proper formats using an IF statement ");
+		//Border for easy reading
+		System.out.println("***** ***** ***** ***** *****  ***** ***** ***** ***** *****");
+		
+		//INPUT
+		//Prompts user for name
+		System.out.println("What is your name?");
+		//Assignment Statement
+		userName = input.nextLine();
+
+		//Prompts user for sod type
+		System.out.println("What Item is it?");
+		//Assignment Statement
+		itemName = input.nextLine();
+
+		//Prompts user for original price
+		System.out.println("What is the price for the item?(no $ needed)");
+		//Assignment Statement
+		originalPrice = input.nextDouble();
+
+		//Prompts user for amount of bags
+		System.out.println("How many?");
+		//Assignment Statement
+		howMany = input.nextInt();
+		
+		//menu
+		//Border for easy reading
+		System.out.println("\n~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~");
+		//menu title
+		System.out.println("DISCOUNT MENU");
+		System.out.println("~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~");
+		//menu options
+		System.out.printf("%-4s%-7s%3.1f%s\n", "[A]", DISCOUNT_NAME_MEMBER, DISCOUNT_RATE_MEMBER*100, "%");
+		System.out.printf("%-4s%-7s%3.1f%s\n", "[B]", DISCOUNT_NAME_SENIOR, DISCOUNT_RATE_SENIOR*100, "%");
+		System.out.printf("%-4s%-7s%4.1f%s\n", "[C]", DISCOUNT_NAME_NONE, DISCOUNT_RATE_NONE, "%");
+		System.out.println("~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~");
+		//menu prompt
+		System.out.println("Enter your selection here: ");
+		//Assignment statement
+		menuSelection = input.next().toUpperCase().charAt(0);
+		
+		//PROCESS
+		//IF Statement
+		//Test to find and apply the correct discount if any
+		
+		//Start IF
+		if(menuSelection == 'A')
+		{
+			//Assignment Statement
+			discountRate = DISCOUNT_RATE_MEMBER;
+		}// END IF
+		else if(menuSelection == 'B')
+		{
+			//Assignment Statement
+			discountRate = DISCOUNT_RATE_SENIOR;
+		}// END ELSE IF
+		else
+		{
+			//Assignment Statement
+			discountRate = DISCOUNT_RATE_NONE;
+		}// END ELSE
+		
+		//Assignment discount amount
+		discountAmount = originalPrice * discountRate;
+		//Assignment discount price
+		discountPrice = originalPrice - discountAmount;
+		//Assignment subtotal
+		subTotal = discountPrice * howMany;
+		//Assignment tax amount
+		tax = subTotal * TAX_RATE;
+		//Assignment total
+		totalCost = subTotal + tax;
+		
+		//OUTPUT
+		
+		//Order Report
+		//Border for easy reading
+		System.out.println("~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~");
+		//Report Title
+		System.out.println("Order Report");
+		//Border for easy reading
+		System.out.println("~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~");
+		//The Following should print 3 columns
+		//1 column is left aligned
+		//All Columns printed as strings
+		System.out.printf("%-20s%s%s\n","User","", userName);
+		//The Following should print 3 columns
+		//1 column is left aligned
+		//All Columns printed as strings
+		System.out.printf("%-20s%s%5s\n","Item name","", itemName);
+		//The Following should print 3 columns
+		//1 column is left aligned 
+		//2 Columns printed as strings, 1 column is a double with 2 decimal places
+		System.out.printf("%-20s%-5s%6.2f\n", "Original Price","$",originalPrice);
+		//The Following should print 4 columns
+		//1 column is left aligned 
+		//All Columns printed as strings, 1 column converts the rate with 1 decimal place 
+		System.out.printf("%-20s%-5s%5s%s\n","Discount Rate","",discountRate*100, "%");
+		//The Following should print 3 columns
+		//1 column is left aligned 
+		//2 Columns printed as strings, 1 column is a double with 2 decimal places
+		System.out.printf("%-20s%-5s%6.2f\n","Discount Amount", "$",discountAmount);
+		//The Following should print 3 columns
+		//1 column is left aligned 
+		//2 Columns printed as strings, 1 column is a double with 2 decimal places
+		System.out.printf("%-20s%-5s%6.2f\n","Discount price", "$",discountPrice);
+		//The Following should print 3 columns
+		//1 column is left aligned 
+		//2 Columns printed as strings, 1 column is a integer with no decimal places
+		System.out.printf("%-20s%-9s%2d\n","Quantity","",howMany);
+		//The Following should print 3 columns
+		//1 column is left aligned 
+		//2 Columns printed as strings, 1 column is a double with 2 decimal places
+		System.out.printf("%-20s%-5s%6.2f\n","Subtotal", "$",subTotal);
+		//The Following should print 3 columns
+		//1 column is left aligned 
+		//2 Columns printed as strings, 1 column is a double with 2 decimal places
+		System.out.printf("%-20s%-6s%5.2f\n","Tax", "$", tax);
+		//The Following should print 3 columns
+		//1 column is left aligned 
+		//2 Columns printed as strings, 1 column is a double with 2 decimal places
+		System.out.printf("%-20s%-5s%6.2f\n","Total amount owed","$",totalCost);
+		//Border for easy reading
+		System.out.println("~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~");
+		
+		//Farewell Message
+		//Displays the farewell message
+		System.out.println("Thank you for your business.");
+		System.out.println("Have a great day!");
+
+		//Close Scanner
+		input.close();
+
+	}//END OF main method
+
+}//END class main
+
