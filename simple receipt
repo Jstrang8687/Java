@@ -1,0 +1,109 @@
+//AUTHOR: Jason Strang
+//COURSE: CPT167
+//PURPOSE: To give the user a transaction receipt of bags of sod purchased,
+//price of sod, discounted price, and total cost of sod based off user input
+//STARTDATE: 3/15/21
+
+package edu.cpt167.strang.exercise1;
+import java.util.Scanner;
+
+public class StrangMainClass 
+{
+	//main method
+	public static void main(String[] args) 
+	{
+		//INTRODUCTION
+
+		Scanner input = new Scanner(System.in);
+
+		//constants
+		final double DISCOUNT_RATE = 0.25; // Fixed discount rate of .25
+
+		//variables
+		String userName = ""; //Name of current user
+		String itemName = ""; // Type of sod purchased
+		double originalPrice = 0.0; // Original price for each bag of sod 
+		int howMany = 0; //Number of bags a customer purchased
+		double discountAmount = 0.0; //Discount amount for each bag
+		double discountPrice = 0.0; //Discount Price for each bag
+		double totalCost = 0.0; //Total cost of the transaction
+
+		//Welcome Banner
+		System.out.println("Welcome to the Sod Store Program");
+		System.out.println("To give the user a transaction receipt of bags of sod ");
+		System.out.println("purchased, sod price, discounted price, and total cost");
+		//Border for easy reading
+		System.out.println("***** ***** ***** ***** *****  ***** ***** ***** ***** *****");
+
+		//Input
+
+		//Prompts user for name
+		System.out.println("What is your name?");
+		//Assignment Statement
+		userName = input.nextLine();
+
+		//Prompts user for sod type
+		System.out.println("What Type of sod is it?");
+		//Assignment Statement
+		itemName = input.nextLine();
+
+		//Prompts user for original price
+		System.out.println("What is the price for the bag of sod?(no $ needed)");
+		//Assignment Statement
+		originalPrice = input.nextDouble();
+
+		//Prompts user for amount of bags
+		System.out.println("How many bags?");
+		//Assignment Statement
+		howMany = input.nextInt();
+
+		//Process
+
+		//Assignment statement for discountAmount
+		discountAmount = originalPrice * DISCOUNT_RATE;
+
+		//Assignment statement for discountPrice
+		discountPrice = originalPrice - discountAmount;
+
+		//Assignment statement for totalCost
+		totalCost = howMany * discountPrice;
+
+		//Output
+
+		//Order Report
+		//Border for easy reading
+		System.out.println("~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~");
+		//Report Title
+		System.out.println("Final Report");
+		//Border for easy reading
+		System.out.println("~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~");
+		//Label on the left and value on the right
+		System.out.println("User: " + userName);
+		//Label on the left and value on the right
+		System.out.println("Type of sod: " + itemName);
+		//Label, dollar sign, value
+		System.out.println("Original Price: $" + originalPrice);
+		//Label, rate*100, percentage sign
+		System.out.println("Discount: " + DISCOUNT_RATE*100 + "%");
+		//Label, dollar sign, value
+		System.out.println("Discount Amount: $" + discountAmount);
+		//Label, dollar sign, value
+		System.out.println("Discount price per bag of sod: $" + discountPrice);
+		//Label on the left and value on the right
+		System.out.println("Amount of sod: " + howMany);
+		//Label, dollar sign, value
+		System.out.println("Total amount owed: $" + totalCost);
+		//Border for easy reading
+		System.out.println("~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~");
+
+		//Farewell Message
+		//Displays the farewell message
+		System.out.println("Thank you for your business.");
+		System.out.println("Have a great day!");
+
+		//Close Scanner
+		input.close();
+
+	}//END OF main method
+
+}//END class main
